@@ -1,0 +1,11 @@
+# KARON3 ETERNITY FIRE - Clippy Configuration
+# H1: 임의 Pubkey 생성 금지
+
+disallowed-methods = [
+    { path = "solana_sdk::pubkey::Pubkey::new_unique", reason = "KARON3: 임의 Pubkey 생성 금지 - R2 규칙" },
+    { path = "solana_sdk::pubkey::Pubkey::new_rand", reason = "KARON3: 랜덤 Pubkey 생성 금지 - R2 규칙" },
+]
+
+# 추가 린트 설정
+cognitive-complexity-threshold = 25
+too-many-arguments-threshold = 7

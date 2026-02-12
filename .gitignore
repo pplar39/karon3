@@ -1,0 +1,28 @@
+# Secrets — NEVER commit
+.env
+*.pem
+*.key
+
+# Build artifacts
+/target/
+
+# Logs
+bot.log
+build.log
+*.log
+
+# Backups
+*.bak
+*.bak_
+/backups/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+/tmp/
+target/
