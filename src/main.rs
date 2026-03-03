@@ -132,6 +132,18 @@ fn get_isolated_cores() -> Vec<usize> {
 }
 
 fn main() -> Result<()> {
+    // ── G1: Process singleton — prevent zombie duplicate instances ──
+    {
+        use std::os::unix::io::AsRawFd;
+        let lock_file = std::fs::File::create("/tmp/aether-sniper.lock")
+            .expect("singleton: cannot create lock file");
+        if unsafe { libc::flock(lock_file.as_raw_fd(), libc::LOCK_EX | libc::LOCK_NB) } != 0 {
+            eprintln!("FATAL: Another aether-sniper instance is running. Exiting.");
+            std::process::exit(1);
+        }
+        std::mem::forget(lock_file); // hold fd open for process lifetime
+    }
+
     // ═══════════════════════════════════════════════════════
     // IGNIS FIX #3: Explicit runtime builder.
     // Worker thread count = isolated core count.

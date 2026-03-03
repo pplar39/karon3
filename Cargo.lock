@@ -73,6 +73,7 @@ dependencies = [
  "futures",
  "hmac 0.12.1",
  "lazy_static",
+ "libc",
  "maud",
  "mimalloc",
  "parking_lot",
